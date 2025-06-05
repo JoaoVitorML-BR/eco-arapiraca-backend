@@ -27,6 +27,15 @@ class useCase {
         console.log('Created new user:', newUser);
         return newUser;
     }
+
+    async updateUser(userId: string, updateData: any): Promise<any> {
+        const user = await this.userRepository.findById(userId);
+        if (!user) {
+            throw new Error('User not found');
+        }
+        const updatedUser = await this.userRepository.update(userId, updateData);
+        return updatedUser;
+    }
 }
 
 export { useCase };

@@ -19,4 +19,18 @@ export class UserHttpController {
       res.status(400).json({ error: errorMessage });
     }
   }
+
+  async update(req: Request, res: Response): Promise<void> {
+    try {
+      const userId = req.params.id;
+      console.log(`Updating user with ID: ${userId}`);
+      const updateData = req.body;
+      console.log('Update data:', updateData);
+      const updatedUser = await userUseCase.updateUser(userId, updateData);
+      res.status(200).json(updatedUser);
+    } catch (error: any) {
+      const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
+      res.status(400).json({ error: errorMessage });
+    }
+  }
 }
