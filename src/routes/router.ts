@@ -10,5 +10,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/user', userHttpController.create);
+router.put('/user/:id', userHttpController.update.bind(userHttpController));
 
 export default router;
